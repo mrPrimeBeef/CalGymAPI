@@ -11,5 +11,5 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer amount;
+    private Integer votes;
 }

@@ -1,0 +1,114 @@
+@startuml
+
+package Entities {
+' =======================
+' MODEL (JPA Entities)
+' =======================
+class User {
+  - username: String
+  - password: String
+  - registeredUser: Boolean
+  - eventList: List<Event>
+  + getEventList(): List<Event>
+  - verifyPassword(): Boolean
+  + addEvent(): void
+}
+
+class Option {
+  - optionId: Integer
+  - date: Date
+  - time: LocalDateTime
+  - voteList: List<Vote>
+}
+
+class Event {
+  - eventid: Integer
+  - title: String
+  - description: String
+  - optionList: List<Option>
+  - open: Enum
+}
+
+class Vote {
+  - voteId: Integer
+  - votes: Integer
+}
+}
+
+' =======================
+' MODEL (DTOs)
+' =======================
+
+package DTOs {
+
+class UserDTO{}
+class eventDTO{}
+}
+
+' =======================
+' REPOSITORIES (JPA)
+' =======================
+package Persistence {
+class AbstractDAO{
+ + CRUD
+}
+class UserDAO implements AbstractDAO {
+  + findByUsername(username: String): User
+}
+class EventDAO implements AbstractDAO  {
+}
+
+class SecurityDao implements AbstractDAO {
+}
+}
+
+' =======================
+' SERVICES
+' =======================
+package Service  {
+
+}
+' =======================
+' CONTROLLERS (MVC)
+' =======================
+package Controllers{
+class SecurityController {
+  + login(username: String, password: String): void
+  + register(): void
+}
+class EventController {
+ + getAllEvents(): void
+ + createNewEvent(): void
+ + vote(): void
+ + showprocentage(): void
+}
+}
+
+' =======================
+' REST
+' =======================
+package REST{
+class Routes{
+ - {static} controllers
+ + registerRoutes(Javalin app): void
+ + healthcheck()
+}
+}
+class Main{
++ main(String[] args)
+}
+
+' =======================
+' RELATIONSHIPS
+' =======================
+User "1" --> "0..*" Event
+Event "1" --> "0..*" Option
+Option "1" --> "0..*" Vote
+
+Main --> Routes
+Routes --> Controllers
+Controllers --> DTOs
+DTOs <--> Persistence
+Persistence <--> Entities
+
+@enduml

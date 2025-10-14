@@ -26,9 +26,4 @@ public class Event {
 
     @Enumerated(EnumType.STRING)
     private Open open;
-
-    private LocalDate startDate;
-    @Column(name = "created_at")
-    private Instant createdAt = Instant.now();
-
 }

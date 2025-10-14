@@ -16,6 +16,7 @@ public class User {
     @Column(unique = true)
     private String username;
     private String password;
+    private Boolean loggedIn;
 
     @OneToMany
     private List<Event> eventList = new ArrayList<>();
