@@ -1,0 +1,21 @@
+### Health check endpoint
+GET http://localhost:7070/api/auth/health
+
+### Register new user
+POST http://localhost:7070/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testUser",
+  "password": "1234"
+}
+
+### Login
+POST http://localhost:7070/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testUser",
+  "password": "1234"
+}
+

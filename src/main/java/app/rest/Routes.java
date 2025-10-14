@@ -1,0 +1,32 @@
+package app.rest;
+
+import app.controller.EventController;
+import app.controller.SecurityController;
+
+import io.javalin.Javalin;
+import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
+
+
+public class Routes {
+    private SecurityController securityController = new SecurityController();
+    private EventController eventController = new EventController();
+
+    public Routes() {
+    }
+
+    public void registerRoutes(Javalin app) {
+        // Auth routes ->
+        app.post("auth/login", (ctx) -> securityController.login(ctx));
+        app.post("auth/register", (ctx) -> securityController.register(ctx));
+
+        app.post("event", (ctx -> eventController.createNewEvent(ctx)));
+        app.get("event", (ctx -> eventController.getAllevents(ctx)));
+
+        app.get("auth/health", this::healthCheck);
+    }
+
+    public void healthCheck(@NotNull Context ctx) {
+        ctx.status(200).json("{API is up and running}");
+    }
+}
