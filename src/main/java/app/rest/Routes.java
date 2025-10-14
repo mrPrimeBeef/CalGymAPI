@@ -21,12 +21,13 @@ public class Routes {
         app.post("auth/register", (ctx) -> securityController.register(ctx));
 
         app.post("event", (ctx -> eventController.createNewEvent(ctx)));
+        app.post("event/{eventid}/option", (ctx -> eventController.addOption(ctx)));
         app.get("event", (ctx -> eventController.getAllevents(ctx)));
 
         app.get("auth/health", this::healthCheck);
     }
 
     public void healthCheck(@NotNull Context ctx) {
-        ctx.status(200).json("{API is up and running}");
+        ctx.status(200).json("{Msg: API is up and running}");
     }
 }

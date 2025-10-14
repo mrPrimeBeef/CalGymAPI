@@ -79,6 +79,7 @@ class SecurityController {
 class EventController {
  + getAllEvents(): void
  + createNewEvent(): void
+ + addOption(): void
  + vote(): void
  + showprocentage(): void
 }
