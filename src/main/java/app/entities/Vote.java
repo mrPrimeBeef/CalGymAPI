@@ -11,7 +11,6 @@ public class Vote {
 
     private Integer votes;
 
-    // ✅ Mange Votes hører til én Option
     @ManyToOne
     @JoinColumn(name = "option_id")
     private Option option;

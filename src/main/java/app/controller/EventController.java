@@ -40,9 +40,7 @@ public class EventController {
         }
         EventsDTO eventsDTO = new EventsDTO(eventDTOList);
 
-        returnJson.put("EventsDTO", String.valueOf(eventsDTO))
-                .put("username", user.getUsername());
-        ctx.status(HttpStatus.OK).json(returnJson);
+        ctx.status(HttpStatus.OK).json(eventsDTO);
 
         return eventsDTO;
     }
@@ -69,6 +67,5 @@ public class EventController {
 
     public void addOption(Context ctx) {
         OptionDTO optionDTO = ctx.bodyAsClass(OptionDTO.class);
-
     }
 }
