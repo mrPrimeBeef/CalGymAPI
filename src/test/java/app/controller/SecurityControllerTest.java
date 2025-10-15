@@ -88,7 +88,8 @@ class SecurityControllerTest {
                 .body(registerRequest)
                 .when()
                 .post("/auth/register")
-                .statusCode()
+                .then()
+                .statusCode(200)
                 .body("username", equalTo(registerRequest.get("username")));
     }
 }
