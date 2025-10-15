@@ -18,7 +18,7 @@ public class User {
     private String password;
     private Boolean loggedIn;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Event> eventList = new ArrayList<>();
 
     public User() {

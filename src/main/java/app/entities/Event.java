@@ -11,16 +11,23 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "events")
+@NamedQueries({@NamedQuery(name = "Event.deleteAll", query = "DELETE FROM Event")})
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_username", referencedColumnName = "username")
+    private User user;
+
     private String title;
+
     @Column(columnDefinition = "text")
     private String description;
 
-    @OneToMany
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Option> optionList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)

@@ -28,6 +28,8 @@ public class SecurityController {
             UserDTO userInput = ctx.bodyAsClass(UserDTO.class);
             UserDTO verifiedUser = securityDAO.getVerifiedUser(userInput.username(), userInput.password());
 
+            returnJson.put("username", verifiedUser.username());
+
             ctx.status(HttpStatus.OK).json(returnJson);
         } catch (DaoException | ValidationException e) {
             throw new ApiException(401, "Could not verify user", e);
@@ -49,7 +51,7 @@ public class SecurityController {
             }
 
             User createdUserAccount = securityDAO.create(user);
-
+            returnJson.put("username", createdUserAccount.getUsername());
             ctx.status(HttpStatus.OK).json(returnJson);
         } catch (DaoException e) {
             ctx.status(400).json("Somthing went wrong, Error happend or User already exists " + e.getMessage());
