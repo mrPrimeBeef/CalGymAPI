@@ -18,7 +18,7 @@ public class User {
     private String password;
     private Boolean loggedIn;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Event> eventList = new ArrayList<>();
 
     public User() {
@@ -32,4 +32,10 @@ public class User {
     public boolean verifyPassword(String pw) {
         return BCrypt.checkpw(pw, this.password);
     }
+
+    public void addToEventList(Event event){
+        this.eventList.add(event);
+        event.addUser(this);
+    }
+
 }

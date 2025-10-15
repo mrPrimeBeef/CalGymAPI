@@ -42,4 +42,8 @@ public class Event {
         this.optionList = optionList;
         this.open = open;
     }
+
+    public void addUser(User user){
+        this.user = user;
+    }
 }

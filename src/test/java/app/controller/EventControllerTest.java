@@ -78,26 +78,24 @@ class EventControllerTest {
 
     @Test
     void createNewEvent() throws JsonProcessingException {
-
         objectMapper.registerModule(new JavaTimeModule());
 
         List<Option> optionList = new ArrayList<>();
         optionList.add(EVENT_Option1);
         optionList.add(EVENT_Option2);
-
-        Event testEvent = new Event(EVENT_TITLE, EVENT_DESCRIPTION,optionList, Open.OPEN);
+        Event testEvent = new Event(EVENT_TITLE, EVENT_DESCRIPTION, optionList, Open.OPEN);
 
         EventDTO testEventDTO = EventDTO.convertFromEntityToOpenDTO(testEvent);
-
         String bodyJson = objectMapper.writeValueAsString(testEventDTO);
 
         given()
                 .contentType(ContentType.JSON)
                 .body(bodyJson)
                 .when()
-                .post("event/1")
+                .post("event/testuser")
                 .then()
-                .statusCode(200)
-                .body("event_id", equalTo(1));
+                .statusCode(201)
+                .body("event_id", equalTo(1))
+                .body("username", equalTo(TEST_USER));
     }
 }
