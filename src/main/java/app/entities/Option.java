@@ -14,11 +14,7 @@ public class Option {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Temporal(TemporalType.DATE)
-    private Date date;
-
     private LocalDateTime time;
-
 
     @ManyToOne
     @JoinColumn(name = "event_id")
@@ -26,4 +22,17 @@ public class Option {
 
     @OneToMany(mappedBy = "option", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Vote> voteList = new ArrayList<>();
+
+    public Option(LocalDateTime time) {
+        this.time = time;
+    }
+
+    public Option() {
+
+    }
+
+    public void addVote(Vote vote){
+        this.voteList.add(vote);
+    }
+
 }
