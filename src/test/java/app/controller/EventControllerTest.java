@@ -103,7 +103,7 @@ class EventControllerTest {
                 .get("event/testuser")
                 .then()
                 .statusCode(200)
-                .body("eventsDTO.size()", equalTo(2));
+                .body("events.size()", equalTo(2));
     }
 
 

@@ -20,10 +20,12 @@ public class Routes {
         app.post("auth/login", (ctx) -> securityController.login(ctx));
         app.post("auth/register", (ctx) -> securityController.register(ctx));
 
+        // Event routes ->
         app.post("event/{userid}", (ctx -> eventController.createNewEvent(ctx)));
         app.post("event/{eventid}/option", (ctx -> eventController.addOption(ctx)));
         app.get("event/{userid}", (ctx -> eventController.getAllevents(ctx)));
 
+        // Healthcheck
         app.get("auth/health", this::healthCheck);
     }
 
